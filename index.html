@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>John Cursos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos base (mobile first) */
+        .tech-title {
+            font-family: 'Space Mono', monospace;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12vw;
+            white-space: nowrap;
+            pointer-events: none;
+            background: linear-gradient(45deg, #00f3ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
+            z-index: 0;
+        }
+
+        .link-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 5rem 1rem 3rem; /* Ajuste para o rodapé */
+            position: relative;
+            z-index: 1;
+        }
+
+        .study-link {
+            transition: all 0.3s ease;
+            will-change: transform;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            position: relative;
+            padding: 1rem;
+            min-height: 100px;
+            border-radius: 0.75rem;
+            transform: scale(1);
+        }
+
+        .study-link:nth-child(odd) { transform: rotate(1deg) translate(2px, 2px); }
+        .study-link:nth-child(even) { transform: rotate(-1deg) translate(-2px, 2px); }
+        .study-link:nth-child(3n) { transform: rotate(1.5deg) translate(3px, -2px); }
+
+        .toggle-arrow {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.3);
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            touch-action: manipulation; /* Melhora a resposta em touch */
+        }
+
+        .toggle-arrow:hover {
+            color: #00ff88;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .toggle-arrow.active {
+            transform: rotate(180deg);
+        }
+
+        .subtitle {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .subtitle.visible {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .link-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        /* Rodapé */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Estilos para desktop (hover) */
+        @media (hover: hover) and (min-width: 768px) {
+            .study-link:hover {
+                transform: scale(1.30) rotate(0deg) !important;
+                z-index: 10;
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* Feedback para toque em mobile */
+        .study-link:active {
+            transform: scale(1.05) !important;
+        }
+
+        /* Media queries para telas maiores */
+        @media (min-width: 640px) {
+            .link-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                padding: 6rem 2rem 3rem;
+                gap: 1.5rem;
+            }
+            .tech-title { font-size: 8vw; }
+            .study-link { padding: 1.25rem; min-height: 110px; }
+        }
+
+        @media (min-width: 768px) {
+            .tech-title { font-size: 6vw; }
+            .study-link { min-height: 120px; }
+            .study-link:nth-child(odd) { transform: rotate(2deg) translate(5px, 5px); }
+            .study-link:nth-child(even) { transform: rotate(-1deg) translate(-5px, 5px); }
+            .study-link:nth-child(3n) { transform: rotate(1.5deg) translate(5px, -5px); }
+        }
+
+        @media (min-width: 1024px) {
+            .link-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                padding: 7rem 3rem 3rem;
+            }
+            footer {
+                padding: 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen text-white flex flex-col">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-black/50 backdrop-blur-md z-50">
+        <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
+            <h1 class="text-lg sm:text-xl font-bold">🚀 JOHN CURSOS GRATUITOS</h1>
+            <div class="flex flex-wrap justify-center gap-1 sm:gap-2">
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="all">Todos</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="frontend">Hacker</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="backend">Back-end</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="dados">Front-End</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Título Tecnológico -->
+    <h1 class="tech-title">JOHN CURSOS</h1>
+
+    <!-- Links Compactos -->
+    <div class="link-container">
+        <!-- Cursos de Hacker -->
+        <div class="study-link" data-category="frontend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">👨‍💻 CiberSegurança</h3>
+            <p class="text-gray-300 subtitle">Conceitos básicos de segurança ofensiva e defensiva.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://skillsforall.com/course/introduction-to-cybersecurity" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="frontend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">⚔️ Hacker Ético</h3>
+            <p class="text-gray-300 subtitle">Fundamentos de hacking ético, redes e criptografia.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://codered.eccouncil.org" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="frontend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🛡️ Cyber Essentials</h3>
+            <p class="text-gray-300 subtitle">Técnicas de proteção de redes e análise de vulnerabilidades.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://skillsforall.com/course/cybersecurity-essentials" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="frontend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🔓 Pentesting</h3>
+            <p class="text-gray-300 subtitle">Laboratórios práticos com Metasploit e Nmap.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://www.opensploit.org" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="frontend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">📜 Alison - Hacking</h3>
+            <p class="text-gray-300 subtitle">Curso introdutório de hacking ético.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://alison.com/course/diploma-in-ethical-hacking" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <!-- Cursos de Back-end -->
+        <div class="study-link" data-category="backend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🧠 Curso em Vídeo</h3>
+            <p class="text-gray-300 subtitle">Cursos gratuitos de programação (Python, JavaScript, HTML/CSS), TI e tecnologia.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://www.cursoemvideo.com" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="backend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">💻 HackerRank</h3>
+            <p class="text-gray-300 subtitle">Desafios de algoritmos e estruturas de dados.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://www.hackerrank.com" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="backend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Python.org</h3>
+            <p class="text-gray-300 subtitle">Tutoriais oficiais de Python.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
+        </div>
+        <div class="study-link" data-category="backend">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Digital Innovation One (DIO)</h3>
+            <p class="text-gray-300 subtitle">Cursos de back-end, front-end, cybersecurity e DevOps com projetos práticos.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
+        </div>
+        <div class="study-link" data-category="dados">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Escola Virtual (Fundação Bradesco)</h3>
+            <p class="text-gray-300 subtitle">Cursos gratuitos de TI, programação, Excel, gestão e mais.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://www.ev.org.br" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <!-- Cursos de Front-end -->
+        <div class="study-link" data-category="dados">
+            <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Frontend Masters</h3>
+            <p class="text-gray-300 subtitle">Cursos avançados de JavaScript e frameworks.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://frontendmasters.com" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <!-- Cursos de Dados -->
+        <div class="study-link" data-category="dados">
+            <h3 class="text-base sm:text-lg font-bold mb-1">📊 Kaggle</h3>
+            <p class="text-gray-300 subtitle">Cursos práticos de ciência de dados e ML.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://www.kaggle.com/learn" target="_blank" class="link-overlay"></a>
+        </div>
+
+        <div class="study-link" data-category="dados">
+            <h3 class="text-base sm:text-lg font-bold mb-1">📈 Brilliant</h3>
+            <p class="text-gray-300 subtitle">Matemática e ciência de dados interativos.</p>
+            <span class="toggle-arrow text-blue-400">▼</span>
+            <a href="https://brilliant.org" target="_blank" class="link-overlay"></a>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="mt-auto">
+        <div class="container mx-auto">
+            <p>© 2025 John Cursos Gratuitos - Todos os direitos reservados @john1santoz</p>
+            <p class="text-xs opacity-70 mt-1">Links para cursos gratuitos de tecnologia</p>
+        </div>
+    </footer>
+
+    <script>
+        // Movimento Parallax (apenas para desktop)
+        if (window.innerWidth > 768) {
+            let mousePos = { x: 0.5, y: 0.5 };
+            
+            document.addEventListener('mousemove', (e) => {
+                mousePos = { 
+                    x: e.clientX / window.innerWidth, 
+                    y: e.clientY / window.innerHeight 
+                };
+            });
+
+            function animate() {
+                document.querySelectorAll('.study-link').forEach((link, index) => {
+                    if(link.matches(':hover')) return;
+                    
+                    const speed = 0.3 + (index * 0.02);
+                    const xOffset = (mousePos.x - 0.5) * 100 * speed;
+                    const yOffset = (mousePos.y - 0.5) * 100 * speed;
+                    const rotation = (mousePos.x - 0.5) * 8 * (index % 2 === 0 ? 1 : -1);
+                    
+                    link.style.transform = `
+                        rotate(${rotation}deg)
+                        translate(${xOffset}px, ${yOffset}px)
+                    `;
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Sistema de Filtros
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                document.querySelectorAll('.study-link').forEach(link => {
+                    link.style.display = (category === 'all' || link.dataset.category === category) 
+                        ? 'block' 
+                        : 'none';
+                });
+                
+                document.querySelectorAll('.category-btn').forEach(b => {
+                    b.classList.toggle('text-blue-400', b === this);
+                    b.classList.toggle('bg-blue-900/30', b === this);
+                });
+            });
+        });
+
+        // Toggle Subtítulos - Corrigido para mobile
+        document.querySelectorAll('.toggle-arrow').forEach(arrow => {
+            // Adiciona tanto click quanto touchstart
+            arrow.addEventListener('click', handleToggle);
+            arrow.addEventListener('touchstart', handleToggle);
+        });
+
+        function handleToggle(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const card = this.closest('.study-link');
+            const subtitle = card.querySelector('.subtitle');
+            this.classList.toggle('active');
+            subtitle.classList.toggle('visible');
+        }
+
+        // Prevenir comportamento padrão do touch
+        document.addEventListener('touchstart', function() {}, { passive: true });
+
+        // Corrige o problema do hover em mobile
+        document.addEventListener('touchend', function(e) {
+            const touchedElement = document.elementFromPoint(
+                e.changedTouches[0].clientX,
+                e.changedTouches[0].clientY
+            );
+            
+            if (touchedElement && touchedElement.classList.contains('study-link')) {
+                touchedElement.click();
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
