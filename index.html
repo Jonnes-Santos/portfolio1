@@ -2,14 +2,18 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>John Cursos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos base (mobile first) */
+        html, body {
+            overflow-x: hidden;
+        }
+
         .tech-title {
             font-family: 'Space Mono', monospace;
             position: fixed;
@@ -25,21 +29,23 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
             z-index: 0;
+            will-change: transform;
         }
 
         .link-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
             gap: 1rem;
             padding: 5rem 1rem 3rem;
             position: relative;
             z-index: 1;
+            overflow: hidden;
         }
 
         .study-link {
             transition: all 0.3s ease;
             will-change: transform;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
             cursor: pointer;
             position: relative;
             padding: 1rem;
@@ -50,7 +56,6 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Cores por categoria */
         .study-link[data-category="frontend"] {
             border-color: #00ff8870;
             background: linear-gradient(45deg, rgba(0, 255, 136, 0.05), rgba(0, 243, 255, 0.05));
@@ -77,8 +82,8 @@
             font-size: 1rem;
             z-index: 2;
             background: rgba(0, 0, 0, 0.3);
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 2rem;
+            height: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -101,7 +106,7 @@
             overflow: hidden;
             transition: all 0.3s ease;
             margin: 0;
-            font-size: 0.85rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
             line-height: 1.4;
         }
 
@@ -117,18 +122,16 @@
             z-index: 1;
         }
 
-        /* Rodapé */
         footer {
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             padding: 1rem;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
             position: relative;
             z-index: 2;
         }
 
-        /* Estilos para desktop */
         @media (hover: hover) and (min-width: 768px) {
             .study-link:hover {
                 transform: scale(1.30) rotate(0deg) !important;
@@ -136,9 +139,11 @@
                 background: rgba(255, 255, 255, 0.15);
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
             }
+            .study-link {
+                backdrop-filter: blur(10px);
+            }
         }
 
-        /* Cores dos botões de categoria */
         .category-btn[data-category="frontend"]:hover {
             color: #00ff88 !important;
         }
@@ -150,10 +155,32 @@
         }
 
         .study-link:active {
-            transform: scale(1.05) !important;
+            transform: scale(0.95) !important;
         }
 
-        /* Media queries */
+        @media (max-width: 360px) {
+            .tech-title {
+                font-size: 14vw;
+                top: 40%;
+            }
+            .link-container {
+                grid-template-columns: 1fr;
+                padding: 4rem 0.5rem 2rem;
+                gap: 0.8rem;
+            }
+            .study-link {
+                min-height: 90px;
+                padding: 0.8rem;
+            }
+            nav .container {
+                padding: 0.5rem;
+            }
+            .category-btn {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
         @media (min-width: 640px) {
             .link-container {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -179,14 +206,48 @@
             }
             footer {
                 padding: 1.5rem;
-                font-size: 0.9rem;
+            }
+        }
+
+        @media (orientation: portrait) and (max-width: 768px) {
+            .tech-title {
+                font-size: 10vw;
+                top: 30%;
+            }
+            .link-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #111;
+            }
+            .study-link {
+                background: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        @supports(padding: max(0px)) {
+            body {
+                padding: env(safe-area-inset-top) env(safe-area-inset-right)
+                        env(safe-area-inset-bottom) env(safe-area-inset-left);
+            }
+            nav {
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .study-link {
+                transition: none;
             }
         }
     </style>
 </head>
 <body class="bg-gray-900 min-h-screen text-white flex flex-col">
     <!-- Navbar -->
-    <nav class="fixed w-full bg-black/50 backdrop-blur-md z-50">
+    <nav class="fixed w-full bg-black/50 backdrop-blur-md z-50" role="navigation" aria-label="Menu principal">
         <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
             <h1 class="text-lg sm:text-xl font-bold">🚀 JOHN CURSOS GRATUITOS</h1>
             <div class="flex flex-wrap justify-center gap-1 sm:gap-2">
@@ -202,95 +263,95 @@
     <h1 class="tech-title">JOHN CURSOS</h1>
 
     <!-- Links Compactos -->
-    <div class="link-container">
-        <!-- Seção Hacker (Verde/Ciano) -->
-        <div class="study-link" data-category="frontend">
+    <div class="link-container" role="list">
+        <!-- Seção Hacker -->
+        <div class="study-link" data-category="frontend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">👨‍💻 CiberSegurança</h3>
             <p class="text-gray-300 subtitle">Conceitos básicos de segurança ofensiva e defensiva.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://skillsforall.com/course/introduction-to-cybersecurity" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="frontend">
+        <div class="study-link" data-category="frontend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">⚔️ Hacker Ético</h3>
             <p class="text-gray-300 subtitle">Fundamentos de hacking ético, redes e criptografia.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://codered.eccouncil.org" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="frontend">
+        <div class="study-link" data-category="frontend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🛡️ Cyber Essentials</h3>
             <p class="text-gray-300 subtitle">Técnicas de proteção de redes e análise de vulnerabilidades.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://skillsforall.com/course/cybersecurity-essentials" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="frontend">
+        <div class="study-link" data-category="frontend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🔓 Pentesting</h3>
             <p class="text-gray-300 subtitle">Laboratórios práticos com Metasploit e Nmap.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://www.opensploit.org" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="frontend">
+        <div class="study-link" data-category="frontend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">📜 Alison - Hacking</h3>
             <p class="text-gray-300 subtitle">Curso introdutório de hacking ético.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://alison.com/course/diploma-in-ethical-hacking" target="_blank" class="link-overlay"></a>
         </div>
 
-        <!-- Seção Back-end (Azul) -->
-        <div class="study-link" data-category="backend">
+        <!-- Seção Back-end -->
+        <div class="study-link" data-category="backend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🧠 Curso em Vídeo</h3>
             <p class="text-gray-300 subtitle">Cursos gratuitos de programação (Python, JavaScript, HTML/CSS), TI e tecnologia.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://www.cursoemvideo.com" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="backend">
+        <div class="study-link" data-category="backend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">💻 HackerRank</h3>
             <p class="text-gray-300 subtitle">Desafios de algoritmos e estruturas de dados.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://www.hackerrank.com" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="backend">
+        <div class="study-link" data-category="backend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Python.org</h3>
             <p class="text-gray-300 subtitle">Tutoriais oficiais de Python.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="backend">
+        <div class="study-link" data-category="backend" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Digital Innovation One (DIO)</h3>
             <p class="text-gray-300 subtitle">Cursos de back-end, front-end, cybersecurity e DevOps com projetos práticos.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
         </div>
 
-        <!-- Seção Front-End (Roxo) -->
-        <div class="study-link" data-category="dados">
+        <!-- Seção Front-End -->
+        <div class="study-link" data-category="dados" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Escola Virtual (Fundação Bradesco)</h3>
             <p class="text-gray-300 subtitle">Cursos gratuitos de TI, programação, Excel, gestão e mais.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://www.ev.org.br" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="dados">
+        <div class="study-link" data-category="dados" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Frontend Masters</h3>
             <p class="text-gray-300 subtitle">Cursos avançados de JavaScript e frameworks.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://frontendmasters.com" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="dados">
+        <div class="study-link" data-category="dados" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">📊 Kaggle</h3>
             <p class="text-gray-300 subtitle">Cursos práticos de ciência de dados e ML.</p>
             <span class="toggle-arrow">▼</span>
             <a href="https://www.kaggle.com/learn" target="_blank" class="link-overlay"></a>
         </div>
 
-        <div class="study-link" data-category="dados">
+        <div class="study-link" data-category="dados" role="listitem">
             <h3 class="text-base sm:text-lg font-bold mb-1">📈 Brilliant</h3>
             <p class="text-gray-300 subtitle">Matemática e ciência de dados interativos.</p>
             <span class="toggle-arrow">▼</span>
@@ -307,7 +368,7 @@
     </footer>
 
     <script>
-        // Movimento Parallax (apenas para desktop)
+        // Movimento Parallax
         if (window.innerWidth > 768) {
             let mousePos = { x: 0.5, y: 0.5 };
             
