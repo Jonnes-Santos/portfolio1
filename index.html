@@ -31,7 +31,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1rem;
-            padding: 5rem 1rem 3rem; /* Ajuste para o rodapé */
+            padding: 5rem 1rem 3rem;
             position: relative;
             z-index: 1;
         }
@@ -40,14 +40,28 @@
             transition: all 0.3s ease;
             will-change: transform;
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             position: relative;
             padding: 1rem;
             min-height: 100px;
             border-radius: 0.75rem;
             transform: scale(1);
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Cores por categoria */
+        .study-link[data-category="frontend"] {
+            border-color: #00ff8870;
+            background: linear-gradient(45deg, rgba(0, 255, 136, 0.05), rgba(0, 243, 255, 0.05));
+        }
+        .study-link[data-category="backend"] {
+            border-color: #3b82f670;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05));
+        }
+        .study-link[data-category="dados"] {
+            border-color: #a855f770;
+            background: linear-gradient(45deg, rgba(168, 85, 247, 0.05), rgba(192, 132, 252, 0.05));
         }
 
         .study-link:nth-child(odd) { transform: rotate(1deg) translate(2px, 2px); }
@@ -69,11 +83,11 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            touch-action: manipulation; /* Melhora a resposta em touch */
+            touch-action: manipulation;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .toggle-arrow:hover {
-            color: #00ff88;
             background: rgba(0, 0, 0, 0.5);
         }
 
@@ -114,22 +128,32 @@
             z-index: 2;
         }
 
-        /* Estilos para desktop (hover) */
+        /* Estilos para desktop */
         @media (hover: hover) and (min-width: 768px) {
             .study-link:hover {
                 transform: scale(1.30) rotate(0deg) !important;
                 z-index: 10;
                 background: rgba(255, 255, 255, 0.15);
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
             }
         }
 
-        /* Feedback para toque em mobile */
+        /* Cores dos botões de categoria */
+        .category-btn[data-category="frontend"]:hover {
+            color: #00ff88 !important;
+        }
+        .category-btn[data-category="backend"]:hover {
+            color: #3b82f6 !important;
+        }
+        .category-btn[data-category="dados"]:hover {
+            color: #a855f7 !important;
+        }
+
         .study-link:active {
             transform: scale(1.05) !important;
         }
 
-        /* Media queries para telas maiores */
+        /* Media queries */
         @media (min-width: 640px) {
             .link-container {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -166,10 +190,10 @@
         <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
             <h1 class="text-lg sm:text-xl font-bold">🚀 JOHN CURSOS GRATUITOS</h1>
             <div class="flex flex-wrap justify-center gap-1 sm:gap-2">
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="all">Todos</button>
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="frontend">Hacker</button>
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="backend">Back-end</button>
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 hover:text-blue-400 rounded-full bg-gray-800/50" data-category="dados">Front-End</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="all">Todos</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="frontend">Hacker</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="backend">Back-end</button>
+                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="dados">Front-End</button>
             </div>
         </div>
     </nav>
@@ -179,96 +203,97 @@
 
     <!-- Links Compactos -->
     <div class="link-container">
-        <!-- Cursos de Hacker -->
+        <!-- Seção Hacker (Verde/Ciano) -->
         <div class="study-link" data-category="frontend">
             <h3 class="text-base sm:text-lg font-bold mb-1">👨‍💻 CiberSegurança</h3>
             <p class="text-gray-300 subtitle">Conceitos básicos de segurança ofensiva e defensiva.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://skillsforall.com/course/introduction-to-cybersecurity" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="frontend">
             <h3 class="text-base sm:text-lg font-bold mb-1">⚔️ Hacker Ético</h3>
             <p class="text-gray-300 subtitle">Fundamentos de hacking ético, redes e criptografia.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://codered.eccouncil.org" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="frontend">
             <h3 class="text-base sm:text-lg font-bold mb-1">🛡️ Cyber Essentials</h3>
             <p class="text-gray-300 subtitle">Técnicas de proteção de redes e análise de vulnerabilidades.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://skillsforall.com/course/cybersecurity-essentials" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="frontend">
             <h3 class="text-base sm:text-lg font-bold mb-1">🔓 Pentesting</h3>
             <p class="text-gray-300 subtitle">Laboratórios práticos com Metasploit e Nmap.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://www.opensploit.org" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="frontend">
             <h3 class="text-base sm:text-lg font-bold mb-1">📜 Alison - Hacking</h3>
             <p class="text-gray-300 subtitle">Curso introdutório de hacking ético.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://alison.com/course/diploma-in-ethical-hacking" target="_blank" class="link-overlay"></a>
         </div>
 
-        <!-- Cursos de Back-end -->
+        <!-- Seção Back-end (Azul) -->
         <div class="study-link" data-category="backend">
             <h3 class="text-base sm:text-lg font-bold mb-1">🧠 Curso em Vídeo</h3>
             <p class="text-gray-300 subtitle">Cursos gratuitos de programação (Python, JavaScript, HTML/CSS), TI e tecnologia.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://www.cursoemvideo.com" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="backend">
             <h3 class="text-base sm:text-lg font-bold mb-1">💻 HackerRank</h3>
             <p class="text-gray-300 subtitle">Desafios de algoritmos e estruturas de dados.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://www.hackerrank.com" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="backend">
             <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Python.org</h3>
             <p class="text-gray-300 subtitle">Tutoriais oficiais de Python.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
         </div>
+
         <div class="study-link" data-category="backend">
             <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Digital Innovation One (DIO)</h3>
             <p class="text-gray-300 subtitle">Cursos de back-end, front-end, cybersecurity e DevOps com projetos práticos.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
         </div>
+
+        <!-- Seção Front-End (Roxo) -->
         <div class="study-link" data-category="dados">
             <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Escola Virtual (Fundação Bradesco)</h3>
             <p class="text-gray-300 subtitle">Cursos gratuitos de TI, programação, Excel, gestão e mais.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://www.ev.org.br" target="_blank" class="link-overlay"></a>
         </div>
 
-        <!-- Cursos de Front-end -->
         <div class="study-link" data-category="dados">
             <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Frontend Masters</h3>
             <p class="text-gray-300 subtitle">Cursos avançados de JavaScript e frameworks.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://frontendmasters.com" target="_blank" class="link-overlay"></a>
         </div>
 
-        <!-- Cursos de Dados -->
         <div class="study-link" data-category="dados">
             <h3 class="text-base sm:text-lg font-bold mb-1">📊 Kaggle</h3>
             <p class="text-gray-300 subtitle">Cursos práticos de ciência de dados e ML.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://www.kaggle.com/learn" target="_blank" class="link-overlay"></a>
         </div>
 
         <div class="study-link" data-category="dados">
             <h3 class="text-base sm:text-lg font-bold mb-1">📈 Brilliant</h3>
             <p class="text-gray-300 subtitle">Matemática e ciência de dados interativos.</p>
-            <span class="toggle-arrow text-blue-400">▼</span>
+            <span class="toggle-arrow">▼</span>
             <a href="https://brilliant.org" target="_blank" class="link-overlay"></a>
         </div>
     </div>
@@ -330,9 +355,8 @@
             });
         });
 
-        // Toggle Subtítulos - Corrigido para mobile
+        // Toggle Subtítulos
         document.querySelectorAll('.toggle-arrow').forEach(arrow => {
-            // Adiciona tanto click quanto touchstart
             arrow.addEventListener('click', handleToggle);
             arrow.addEventListener('touchstart', handleToggle);
         });
