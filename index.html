@@ -1,450 +1,1154 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>John Cursos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Jonnes Santos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        html, body {
-            overflow-x: hidden;
+        /* Variáveis CSS */
+        :root {
+            --primary-color: #00ff9d;
+            --secondary-color: #00b8ff;
+            --accent-color: #ff00ea;
+            --text-color: #e0e0e0;
+            --bg-gradient: linear-gradient(rgba(15, 15, 26, 0.85), rgba(26, 26, 47, 0.85));
+            --section-spacing: 3rem;
         }
-
-        .tech-title {
-            font-family: 'Space Mono', monospace;
+    
+        /* Reset e Estilos Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            overflow-x: hidden;
+            background: var(--bg-gradient), url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b') center/cover fixed;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+    
+        canvas {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 12vw;
-            white-space: nowrap;
-            pointer-events: none;
-            background: linear-gradient(45deg, #00f3ff, #00ff88);
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    
+        /* Container Principal */
+        .container {
+            position: relative;
+            min-height: 100vh;
+            overflow-y: auto;
+            perspective: 1000px;
+        }
+    
+        /* Seções */
+        section {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: var(--section-spacing) 20rem;
+            margin: 5rem 0;
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    
+        .title-section {
+            height: 100vh;
+            margin: 0;
+            padding-top: 20vh;
+        }
+    
+        /* Tipografia */
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
-            z-index: 0;
-            will-change: transform;
+            animation: glitch 2s infinite;
+            text-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
         }
-
-        .link-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
-            gap: 1rem;
-            padding: 5rem 1rem 3rem;
+    
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+    
+        .text-highlight {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 1.3em;
+            display: inline-block;
+            margin: 0.5rem 0;
             position: relative;
-            z-index: 1;
+        }
+    
+        .text-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            opacity: 0.3;
+        }
+    
+        /* Links Sociais */
+        .social-links {
+            display: grid;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+    
+        .social-link {
+            padding: 1.5rem 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            font-family: 'Ubuntu Mono', monospace;
+            position: relative;
             overflow: hidden;
         }
-
-        .study-link {
-            transition: all 0.3s ease;
-            will-change: transform;
-            backdrop-filter: blur(5px);
-            cursor: pointer;
+    
+        .social-link:hover {
+            transform: translateZ(20px);
+            background: rgba(0, 255, 157, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
+        }
+    
+        .social-link::before {
+            content: '>';
+            position: absolute;
+            left: 1rem;
+            color: var(--primary-color);
+            opacity: 0.5;
+        }
+    
+        /* Textos Flutuantes */
+        .intro-section {
             position: relative;
-            padding: 1rem;
-            min-height: 100px;
-            border-radius: 0.75rem;
-            transform: scale(1);
-            border: 2px solid transparent;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+    
+        .floating-text {
+            text-align: center;
+            transition: transform 5.3s ease-out;
+            will-change: transform;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+        }
+    
+        /* Grids */
+        .tech-grid,
+        .certificate-grid,
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+    
+        .tech-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        .certificate-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    
+        /* Cards */
+        .tech-item,
+        .certificate-item,
+        .experience-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+    
+        .experience-item:hover {
+            transform: translateX(10px);
+        }
+    
+        /* Cybersecurity */
+        .cyber-skills {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+    
+        .cyber-skill-item {
+            padding: 2rem;
+            background: rgba(255, 75, 75, 0.05);
+            border: 1px solid rgba(255, 75, 75, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+    
+        /* Estilos para a seção sobre aprimorada */
+.bio-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+    padding-bottom: 1rem;
+}
+
+.bio-body {
+    line-height: 1.8;
+}
+
+.intro-text {
+    font-size: 1.1em;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.experience-block, 
+.skills-block, 
+.mission-block {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.responsibilities-list {
+    list-style: none;
+    margin-top: 1.5rem;
+}
+
+.responsibilities-list li {
+    margin-bottom: 1.2rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.responsibilities-list li i {
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    color: var(--primary-color);
+}
+.skill-category {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.1);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.skill-category {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+}
+
+.skill-category h4 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mission-block {
+    border-top: 1px dashed var(--primary-color);
+    padding-top: 2rem;
+    text-align: center;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bio-body {
+        padding: 0 1rem;
+    }
+}
+
+        /* Novos estilos para Rodapé */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-col h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .legal-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .security-badge, .a11y-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8em;
             background: rgba(255, 255, 255, 0.05);
         }
 
-        .study-link[data-category="frontend"] {
-            border-color: #00ff8870;
-            background: linear-gradient(45deg, rgba(0, 255, 136, 0.05), rgba(0, 243, 255, 0.05));
-        }
-        .study-link[data-category="backend"] {
-            border-color: #3b82f670;
-            background: linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05));
-        }
-        .study-link[data-category="dados"] {
-            border-color: #a855f770;
-            background: linear-gradient(45deg, rgba(168, 85, 247, 0.05), rgba(192, 132, 252, 0.05));
-        }
+        .security-badge i { color: #00ff9d; }
+        .a11y-badge i { color: #00b8ff; }
 
-        .study-link:nth-child(odd) { transform: rotate(1deg) translate(2px, 2px); }
-        .study-link:nth-child(even) { transform: rotate(-1deg) translate(-2px, 2px); }
-        .study-link:nth-child(3n) { transform: rotate(1.5deg) translate(3px, -2px); }
-
-        .toggle-arrow {
-            position: absolute;
-            bottom: 0.5rem;
-            right: 0.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 1rem;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.3);
-            width: 2rem;
-            height: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            touch-action: manipulation;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .toggle-arrow:hover {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .toggle-arrow.active {
-            transform: rotate(180deg);
-        }
-
-        .subtitle {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            margin: 0;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-            line-height: 1.4;
-        }
-
-        .subtitle.visible {
-            max-height: 200px;
-            opacity: 1;
-            margin-top: 0.5rem;
-        }
-
-        .link-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
+        /* Rodapé Original Modificado */
         footer {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
+            padding: 3rem 2rem;
             text-align: center;
-            font-size: clamp(0.7rem, 3vw, 0.9rem);
+            background: rgba(0, 0, 0, 0.6);
+            margin-top: 5rem;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(var(--primary-color), 0.2);
             position: relative;
-            z-index: 2;
         }
 
-        @media (hover: hover) and (min-width: 768px) {
-            .study-link:hover {
-                transform: scale(1.30) rotate(0deg) !important;
-                z-index: 10;
-                background: rgba(255, 255, 255, 0.15);
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-            }
-            .study-link {
-                backdrop-filter: blur(10px);
-            }
+        footer p {
+            margin-bottom: 1.5rem;
+            font-size: 0.9em;
+            opacity: 0.8;
         }
 
-        .category-btn[data-category="frontend"]:hover {
-            color: #00ff88 !important;
-        }
-        .category-btn[data-category="backend"]:hover {
-            color: #3b82f6 !important;
-        }
-        .category-btn[data-category="dados"]:hover {
-            color: #a855f7 !important;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .study-link:active {
-            transform: scale(0.95) !important;
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        @media (max-width: 360px) {
-            .tech-title {
-                font-size: 14vw;
-                top: 40%;
-            }
-            .link-container {
-                grid-template-columns: 1fr;
-                padding: 4rem 0.5rem 2rem;
-                gap: 0.8rem;
-            }
-            .study-link {
-                min-height: 90px;
-                padding: 0.8rem;
-            }
-            nav .container {
-                padding: 0.5rem;
-            }
-            .category-btn {
-                font-size: 0.7rem;
-                padding: 0.25rem 0.5rem;
-            }
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
         }
 
-        @media (min-width: 640px) {
-            .link-container {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                padding: 6rem 2rem 3rem;
-                gap: 1.5rem;
-            }
-            .tech-title { font-size: 8vw; }
-            .study-link { padding: 1.25rem; min-height: 110px; }
+        .footer-links a:hover {
+            color: var(--primary-color);
         }
 
-        @media (min-width: 768px) {
-            .tech-title { font-size: 6vw; }
-            .study-link { min-height: 120px; }
-            .study-link:nth-child(odd) { transform: rotate(2deg) translate(5px, 5px); }
-            .study-link:nth-child(even) { transform: rotate(-1deg) translate(-5px, 5px); }
-            .study-link:nth-child(3n) { transform: rotate(1.5deg) translate(5px, -5px); }
+        .footer-links a:hover::before {
+            width: 100%;
         }
 
-        @media (min-width: 1024px) {
-            .link-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                padding: 7rem 3rem 3rem;
-            }
-            footer {
-                padding: 1.5rem;
-            }
+        footer::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(var(--primary-color), 0.4), 
+                transparent);
+            animation: footerGlow 3s infinite;
         }
+        /* Estilos para a seção de experiência */
+.experience-section {
+    position: relative;
+    padding: 4rem 2rem;
+}
 
-        @media (orientation: portrait) and (max-width: 768px) {
-            .tech-title {
-                font-size: 10vw;
-                top: 30%;
-            }
-            .link-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    margin: 1rem auto;
+    border-radius: 3px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    height: 100%;
+    width: 2px;
+    background: rgba(0, 255, 157, 0.2);
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.timeline-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 255, 157, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    border: 2px solid var(--primary-color);
+    margin-right: 2rem;
+    flex-shrink: 0;
+}
+
+.timeline-content {
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 10px;
+    padding: 1.5rem;
+    flex-grow: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid var(--primary-color);
+}
+
+.timeline-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.company-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.company-name {
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.experience-period {
+    background: rgba(0, 184, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8em;
+}
+
+.responsibility {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.responsibility-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 255, 157, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.responsibility-content h4 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1em;
+}
+
+.responsibility-content p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Efeitos e animações */
+.timeline-item:hover .timeline-badge {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 35px;
+    }
+    
+    .timeline-badge {
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+    }
+    
+    .company-info {
+        flex-direction: column;
+    }
+    
+    .experience-period {
+        margin-top: 0.5rem;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsibility {
+        flex-direction: column;
+    }
+    
+    .responsibility-icon {
+        margin-bottom: 0.5rem;
+    }
+}
+    
+        /* Animações */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #111;
-            }
-            .study-link {
-                background: rgba(0, 0, 0, 0.3);
-            }
+    
+        @keyframes footerGlow {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
-
-        @supports(padding: max(0px)) {
-            body {
-                padding: env(safe-area-inset-top) env(safe-area-inset-right)
-                        env(safe-area-inset-bottom) env(safe-area-inset-left);
-            }
-            nav {
-                padding-top: env(safe-area-inset-top);
-            }
+    
+        /* Responsividade */
+        @media (max-width: 992px) {
+            :root { --section-spacing: 2rem; }
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.2rem; }
         }
-
+    
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            .social-link { padding: 1rem 2rem; }
+            .tech-grid, .certificate-grid { grid-template-columns: 1fr; }
+            section { padding: 2rem 1rem; }
+            footer { padding: 2rem 1rem; }
+            .floating-text { padding: 1rem; }
+        }
+    
+        @media (max-width: 480px) {
+            :root { --section-spacing: 1.5rem; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .footer-links { gap: 1rem; }
+            .footer-grid { gap: 1.5rem; }
+        }
+    
+        /* Acessibilidade */
         @media (prefers-reduced-motion: reduce) {
-            .study-link {
-                transition: none;
+            * {
+                transition: none !important;
+                animation: none !important;
             }
+        }
+    
+        /* WebGL Error */
+        .webgl-error {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            max-width: 90%;
+            text-align: center;
+            display: none;
         }
     </style>
 </head>
-<body class="bg-gray-900 min-h-screen text-white flex flex-col">
-    <!-- Navbar -->
-    <nav class="fixed w-full bg-black/50 backdrop-blur-md z-50" role="navigation" aria-label="Menu principal">
-        <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4">
-            <h1 class="text-lg sm:text-xl font-bold">🚀 JOHN CURSOS GRATUITOS</h1>
-            <div class="flex flex-wrap justify-center gap-1 sm:gap-2">
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="all">Todos</button>
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="frontend">Hacker</button>
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="backend">Back-end</button>
-                <button class="category-btn text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all" data-category="dados">Front-End</button>
+<body>
+    <canvas id="canvas3d"></canvas>
+    <div class="webgl-error"></div>
+    
+    <div class="container">
+        <!-- Seção Título -->
+        <section class="title-section" data-speed="0.05">
+            <h1>&gt;Jonnes Santos_</h1>
+            <div class="social-links">
+                <a href="https://github.com/jonnes-Santos/" class="social-link" data-speed="0.1">
+                    <i class="fab fa-github"></i>
+                    GitHub Code
+                </a>
+                <a href="https://www.linkedin.com/in/jonnes-santos/" class="social-link" data-speed="0.15">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn Pro
+                </a>
+                <a href="#" class="social-link" data-speed="0.2">
+                    <i class="fab fa-codepen"></i>
+                    CodePen Labs
+                </a>
+            </div>
+        </section>
+
+        
+
+        <!-- Seção Sobre - Versão Aprimorada -->
+<section class="about-section" data-speed="0.1">
+    <h2 class="text-highlight">SOBRE MIM</h2>
+    <div class="about-content">
+        <div class="bio-card">
+            <div class="bio-header">
+                <i class="fas fa-terminal"></i>
+                <p class="text-highlight">Desenvolvedor Full-Stack & Entusiasta de Segurança Cibernética</p>
+            </div>
+            
+            <div class="bio-body">
+                <p class="intro-text">
+                    Seja bem-vindo(a) ao meu portfólio profissional! Sou graduando em Ciência da Computação 
+                    com paixão por desenvolvimento de software e segurança da informação.
+                </p>
+                
+                <div class="experience-block">
+                    <h3>Atuação Atual</h3>
+                    <p>
+                        Como <strong>Analista de Redes e Infraestrutura</strong>, minhas responsabilidades incluem:
+                    </p>
+                    <ul class="responsibilities-list">
+                        <li>
+                            <i class="fas fa-cog"></i>
+                            <strong>Manutenção remota de sistemas:</strong> Gerenciamento de computadores corporativos, 
+                            atualização de ferramentas e verificação de integridade de sistemas
+                        </li>
+                        <li>
+                            <i class="fas fa-network-wired"></i>
+                            <strong>Otimização de infraestrutura:</strong> Garantia de operacionalidade contínua 
+                            com identificação proativa de vulnerabilidades
+                        </li>
+                        <li>
+                            <i class="fas fa-shield-alt"></i>
+                            <strong>Segurança proativa:</strong> Implementação de políticas de conformidade 
+                            e proteção de ambientes digitais
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skills-block">
+                    <h3>Competências Técnicas</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-code"></i> Desenvolvimento</h4>
+                            <p>Java, PHP, SQL, HTML/CSS, JavaScript</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-brain"></i> Fundamentos</h4>
+                            <p>Estruturas de dados, algoritmos, design de software</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-lock"></i> Cybersecurity</h4>
+                            <p>Ethical Hacking, Pentest Web, Hardening</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mission-block">
+                    <h3>Minha Missão</h3>
+                    <p>
+                        Unir expertise técnica e visão estratégica para proteger infraestruturas digitais, 
+                        promover eficiência operacional e impulsionar a transformação segura das organizações 
+                        através de soluções inovadoras.
+                    </p>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
 
-    <!-- Título Tecnológico -->
-    <h1 class="tech-title">JOHN CURSOS</h1>
-
-    <!-- Links Compactos -->
-    <div class="link-container" role="list">
-        <!-- Seção Hacker -->
-        <div class="study-link" data-category="frontend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">👨‍💻 CiberSegurança</h3>
-            <p class="text-gray-300 subtitle">Conceitos básicos de segurança ofensiva e defensiva.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://skillsforall.com/course/introduction-to-cybersecurity" target="_blank" class="link-overlay"></a>
+        <!-- Seção Experiência - Versão Aprimorada -->
+<section class="experience-section" data-speed="0.1">
+    <div class="section-header">
+        <h2 class="text-highlight">EXPERIÊNCIA PROFISSIONAL</h2>
+        <div class="section-divider"></div>
+    </div>
+    
+    <div class="timeline">
+        <!-- Experiência 1 -->
+        <div class="timeline-item">
+            <div class="timeline-badge">
+                <i class="fas fa-network-wired"></i>
+            </div>
+            <div class="timeline-content">
+                <div class="timeline-header">
+                    <h3>Analista de Redes e Infraestrutura</h3>
+                    <div class="company-info">
+                        <span class="company-name">GATEC Soluções Tecnológicas</span>
+                        <span class="experience-period">2025 - Presente</span>
+                    </div>
+                </div>
+                
+                <div class="experience-details">
+                    <div class="responsibility">
+                        <div class="responsibility-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="responsibility-content">
+                            <h4>Manutenção de Sistemas</h4>
+                            <p>Gerenciamento remoto de computadores corporativos, atualização de ferramentas e verificação de integridade de sistemas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="responsibility">
+                        <div class="responsibility-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="responsibility-content">
+                            <h4>Otimização de Infraestrutura</h4>
+                            <p>Garantia de operacionalidade contínua dos recursos tecnológicos, identificação e resolução de vulnerabilidades para minimizar riscos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="responsibility">
+                        <div class="responsibility-icon">
+                            <i class="fas fa-shield-virus"></i>
+                        </div>
+                        <div class="responsibility-content">
+                            <h4>Segurança Proativa</h4>
+                            <p>Implementação de práticas de conformidade e proteção de ambientes digitais, alinhadas às políticas de segurança corporativa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="study-link" data-category="frontend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">⚔️ Hacker Ético</h3>
-            <p class="text-gray-300 subtitle">Fundamentos de hacking ético, redes e criptografia.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://codered.eccouncil.org" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="frontend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🛡️ Cyber Essentials</h3>
-            <p class="text-gray-300 subtitle">Técnicas de proteção de redes e análise de vulnerabilidades.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://skillsforall.com/course/cybersecurity-essentials" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="frontend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🔓 Pentesting</h3>
-            <p class="text-gray-300 subtitle">Laboratórios práticos com Metasploit e Nmap.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://www.opensploit.org" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="frontend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">📜 Alison - Hacking</h3>
-            <p class="text-gray-300 subtitle">Curso introdutório de hacking ético.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://alison.com/course/diploma-in-ethical-hacking" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <!-- Seção Back-end -->
-        <div class="study-link" data-category="backend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🧠 Curso em Vídeo</h3>
-            <p class="text-gray-300 subtitle">Cursos gratuitos de programação (Python, JavaScript, HTML/CSS), TI e tecnologia.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://www.cursoemvideo.com" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="backend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">💻 HackerRank</h3>
-            <p class="text-gray-300 subtitle">Desafios de algoritmos e estruturas de dados.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://www.hackerrank.com" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="backend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Python.org</h3>
-            <p class="text-gray-300 subtitle">Tutoriais oficiais de Python.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="backend" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🐍 Digital Innovation One (DIO)</h3>
-            <p class="text-gray-300 subtitle">Cursos de back-end, front-end, cybersecurity e DevOps com projetos práticos.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://docs.python.org/3/tutorial/" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <!-- Seção Front-End -->
-        <div class="study-link" data-category="dados" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Escola Virtual (Fundação Bradesco)</h3>
-            <p class="text-gray-300 subtitle">Cursos gratuitos de TI, programação, Excel, gestão e mais.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://www.ev.org.br" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="dados" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">🎨 Frontend Masters</h3>
-            <p class="text-gray-300 subtitle">Cursos avançados de JavaScript e frameworks.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://frontendmasters.com" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="dados" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">📊 Kaggle</h3>
-            <p class="text-gray-300 subtitle">Cursos práticos de ciência de dados e ML.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://www.kaggle.com/learn" target="_blank" class="link-overlay"></a>
-        </div>
-
-        <div class="study-link" data-category="dados" role="listitem">
-            <h3 class="text-base sm:text-lg font-bold mb-1">📈 Brilliant</h3>
-            <p class="text-gray-300 subtitle">Matemática e ciência de dados interativos.</p>
-            <span class="toggle-arrow">▼</span>
-            <a href="https://brilliant.org" target="_blank" class="link-overlay"></a>
+        
+        <!-- Experiência 2 -->
+        <div class="timeline-item">
+            <div class="timeline-badge">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="timeline-content">
+                <div class="timeline-header">
+                    <h3>Full-Stack Developer</h3>
+                    <div class="company-info">
+                        <span class="company-name">Inova Systems</span>
+                        <span class="experience-period">2019 - 2021</span>
+                    </div>
+                </div>
+                
+                <div class="experience-details">
+                    <div class="responsibility">
+                        <div class="responsibility-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="responsibility-content">
+                            <h4>Desenvolvimento de Aplicações</h4>
+                            <p>Construção de soluções financeiras utilizando Node.js no backend e React no frontend, com integração a APIs de pagamento.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="responsibility">
+                        <div class="responsibility-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="responsibility-content">
+                            <h4>Gestão de Dados</h4>
+                            <p>Modelagem e otimização de bancos de dados relacionais para aplicações financeiras de alta performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <!-- Rodapé -->
-    <footer class="mt-auto">
-        <div class="container mx-auto">
-            <p>© 2025 John Cursos Gratuitos - Todos os direitos reservados @john1santoz</p>
-            <p class="text-xs opacity-70 mt-1">Links para cursos gratuitos de tecnologia</p>
-        </div>
-    </footer>
+        <!-- Seção Certificados -->
+        <section class="certificate-section" data-speed="0.1">
+            <h2 class="text-highlight">CERTIFICADOS</h2>
+            <div class="certificate-grid">
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Git e GitHub</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>JAVA: Fundamento básico</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>JAVA: Orientação a objetos</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Lógica de Programação</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>PHP: Criando sua Aplicação</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>PHP: Conceitos, dados e loops</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>MySQL: Conhecendo a ferramenta</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Linux: Diretórios, permissões e processos</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Segurança da Informação</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Pentest: Explorando vulnerabilidades</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Pentest: Investigando vulnerabilidades</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Segurança WEB em JAVA</h3>
+                    <p>Alura Cursos</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Introduction to CyberSecurity</h3>
+                    <p>CISCO Academy</p>
+                </div>
+                <div class="certificate-item">
+                    <i class="fas fa-certificate text-highlight"></i>
+                    <h3>Ethical Hacker</h3>
+                    <p>CISCO Academy</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- Seção CyberSecurity -->
+        <section class="cyber-section" data-speed="0.1">
+            <h2 class="text-highlight" style="color: #ff4b4b;">SEGURANÇA CIBERNÉTICA</h2>
+            <div class="cyber-skills">
+                <div class="cyber-skill-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Pentest Básico</h3>
+                    <p>Testes de invasão em ambientes controlados</p>
+                    <p class="text-highlight">OWASP Top 10 | Metasploit | Nmap</p>
+                </div>
+                <div class="cyber-skill-item">
+                    <i class="fas fa-user-secret"></i>
+                    <h3>Hacker Ético</h3>
+                    <p>Análise de vulnerabilidades</p>
+                    <p class="text-highlight">Burp Suite | Wireshark | Kali Linux</p>
+                </div>
+                <div class="cyber-skill-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Hardening</h3>
+                    <p>Hardening de sistemas</p>
+                    <p class="text-highlight">Configurações seguras | Auditorias</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rodapé Modificado -->
+        <footer data-speed="0.1">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Jonnes Santos</h4>
+                    <p>Desenvolvendo o futuro digital<br>
+                    Um commit de cada vez</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-arrow-up"></i> Topo</a>
+                        <a href="#"><i class="fas fa-briefcase"></i> Experiência</a>
+                        <a href="#"><i class="fas fa-shield"></i> Cybersecurity</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Conecte-se</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#"><i class="fab fa-dev"></i> Dev.to</a>
+                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Jonnes Santos. Todos os direitos reservados</p>
+                <div class="legal-links">
+                    <a href="#">GDPR Compliance</a>
+                    <a href="#">Tecnologias Utilizadas</a>
+                    <a href="#">Política de Cookies</a>
+                </div>
+                <div class="badges">
+                    <span class="security-badge"><i class="fas fa-lock"></i> Site Seguro</span>
+                    <span class="a11y-badge"><i class="fas fa-universal-access"></i> WCAG 2.1 AA</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Movimento Parallax
-        if (window.innerWidth > 768) {
-            let mousePos = { x: 0.5, y: 0.5 };
-            
-            document.addEventListener('mousemove', (e) => {
-                mousePos = { 
-                    x: e.clientX / window.innerWidth, 
-                    y: e.clientY / window.innerHeight 
+        // JavaScript original mantido sem alterações
+        let scene, camera, renderer;
+    
+        const showWebGLError = (message) => {
+            const errorDiv = document.querySelector('.webgl-error');
+            errorDiv.innerHTML = `${message}<br>
+                <a href="https://get.webgl.org/" target="_blank" style="color: white; text-decoration: underline;">
+                    Clique aqui para solucionar
+                </a>`;
+            errorDiv.style.display = 'block';
+        };
+    
+        const initScene = () => {
+            try {
+                const canvas = document.querySelector('#canvas3d');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                
+                if (!gl) {
+                    showWebGLError('Seu navegador não suporta WebGL!');
+                    return false;
+                }
+    
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100);
+                renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    alpha: true,
+                    antialias: true
+                });
+    
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+                const createCircuit = () => {
+                    const geometry = new THREE.BoxGeometry(2, 2, 2);
+                    const material = new THREE.MeshBasicMaterial({ 
+                        color: 0x00ff9d,
+                        wireframe: true,
+                        transparent: true,
+                        opacity: 0.1
+                    });
+                    const circuit = new THREE.Mesh(geometry, material);
+                    circuit.position.set(
+                        (Math.random() - 0.5) * 10,
+                        (Math.random() - 0.5) * 10,
+                        (Math.random() - 0.5) * 10
+                    );
+                    return circuit;
                 };
-            });
-
-            function animate() {
-                document.querySelectorAll('.study-link').forEach((link, index) => {
-                    if(link.matches(':hover')) return;
-                    
-                    const speed = 0.3 + (index * 0.02);
-                    const xOffset = (mousePos.x - 0.5) * 100 * speed;
-                    const yOffset = (mousePos.y - 0.5) * 100 * speed;
-                    const rotation = (mousePos.x - 0.5) * 8 * (index % 2 === 0 ? 1 : -1);
-                    
-                    link.style.transform = `
-                        rotate(${rotation}deg)
-                        translate(${xOffset}px, ${yOffset}px)
-                    `;
+    
+                for(let i = 0; i < 15; i++) {
+                    scene.add(createCircuit());
+                }
+    
+                const binaryGeometry = new THREE.BufferGeometry();
+                const binaryCount = 2500;
+                const posArray = new Float32Array(binaryCount * 3);
+    
+                for(let i = 0; i < binaryCount * 3; i++) {
+                    posArray[i] = (Math.random() - 0.5) * 10;
+                }
+    
+                binaryGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                const binaryMaterial = new THREE.PointsMaterial({
+                    size: 0.02,
+                    color: 0x00b8ff
                 });
-                requestAnimationFrame(animate);
+                const binaryParticles = new THREE.Points(binaryGeometry, binaryMaterial);
+                scene.add(binaryParticles);
+    
+                camera.position.z = 5;
+                return true;
+    
+            } catch (error) {
+                showWebGLError('Erro ao inicializar gráficos 3D!');
+                console.error(error);
+                return false;
             }
-            animate();
-        }
-
-        // Sistema de Filtros
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const category = this.dataset.category;
-                
-                document.querySelectorAll('.study-link').forEach(link => {
-                    link.style.display = (category === 'all' || link.dataset.category === category) 
-                        ? 'block' 
-                        : 'none';
-                });
-                
-                document.querySelectorAll('.category-btn').forEach(b => {
-                    b.classList.toggle('text-blue-400', b === this);
-                    b.classList.toggle('bg-blue-900/30', b === this);
-                });
-            });
-        });
-
-        // Toggle Subtítulos
-        document.querySelectorAll('.toggle-arrow').forEach(arrow => {
-            arrow.addEventListener('click', handleToggle);
-            arrow.addEventListener('touchstart', handleToggle);
-        });
-
-        function handleToggle(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const card = this.closest('.study-link');
-            const subtitle = card.querySelector('.subtitle');
-            this.classList.toggle('active');
-            subtitle.classList.toggle('visible');
-        }
-
-        // Prevenir comportamento padrão do touch
-        document.addEventListener('touchstart', function() {}, { passive: true });
-
-        // Corrige o problema do hover em mobile
-        document.addEventListener('touchend', function(e) {
-            const touchedElement = document.elementFromPoint(
-                e.changedTouches[0].clientX,
-                e.changedTouches[0].clientY
-            );
+        };
+    
+        const animate = () => {
+            requestAnimationFrame(animate);
             
-            if (touchedElement && touchedElement.classList.contains('study-link')) {
-                touchedElement.click();
+            scene.children.forEach((obj, index) => {
+                if(obj instanceof THREE.Mesh) {
+                    obj.rotation.x += 0.01 * (index % 5);
+                    obj.rotation.y += 0.01 * (index % 5);
+                }
+            });
+    
+            renderer.render(scene, camera);
+        };
+    
+        const handleMouseMove = (e) => {
+            const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    
+            camera.position.x = mouseX * 0.5;
+            camera.position.y = -mouseY * 0.5;
+    
+            document.querySelectorAll('[data-speed]').forEach(el => {
+                const speed = parseFloat(el.dataset.speed);
+                const x = (e.clientX - window.innerWidth/2) * speed * 0.1;
+                const y = (e.clientY - window.innerHeight/2) * speed * 0.1;
+                
+                if(el.classList.contains('floating-text')) {
+                    el.style.transform = `
+                        translate(${x * 0.5}px, ${y * 0.5}px)
+                        rotateX(${y * 0.2}deg)
+                        rotateY(${x * 0.2}deg)
+                    `;
+                } else {
+                    el.style.transform = `translate(${x}px, ${y}px)`;
+                }
+            });
+        };
+    
+        const configureScrollAnimations = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.25 });
+    
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        };
+    
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    
+        window.addEventListener('load', () => {
+            if(initScene()) {
+                animate();
+                document.addEventListener('mousemove', handleMouseMove);
+                configureScrollAnimations();
             }
-        }, { passive: true });
+            // Efeito de digitação dinâmica no título
+const title = document.querySelector('h1');
+const originalText = title.textContent;
+let isDeleting = false;
+let charIndex = 0;
+let typingSpeed = 150;
+
+const typeEffect = () => {
+    const currentText = originalText.substring(0, charIndex);
+    title.textContent = currentText + (isDeleting ? '' : '|');
+    
+    if (!isDeleting && charIndex === originalText.length) {
+        isDeleting = true;
+        typingSpeed = 300;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        typingSpeed = 300;
+    }
+    
+    charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+    setTimeout(typeEffect, typingSpeed);
+};
+
+// Inicia após 2s (opcional)
+setTimeout(typeEffect, 2000);
+        });
     </script>
 </body>
 </html>
