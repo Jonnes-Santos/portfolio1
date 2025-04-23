@@ -797,6 +797,25 @@
         .skip-link:focus {
             top: 0;
         }
+        @media (max-width: 768px) {
+  .certificate-grid {
+    grid-template-columns: 1fr; /* Força 1 coluna em mobile */
+    gap: 1rem; /* Espaçamento menor entre itens */
+  }
+  
+  .certificate-item {
+    padding: 1.5rem; /* Padding menor para mobile */
+    margin: 0 10px; /* Margem lateral para não colar nas bordas */
+  }
+}
+.certificate-section {
+  display: block !important;
+  width: 100%;
+}
+.certificate-section {
+  position: relative;
+  z-index: 10;
+}
     </style>
 </head>
 <body>
