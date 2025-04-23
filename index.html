@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Jonnes Santos</title>
+    <meta name="description" content="Portfólio profissional de Jonnes Santos - Desenvolvedor Full-Stack e Especialista em Segurança Cibernética">
+    <meta name="keywords" content="desenvolvedor, cybersecurity, portfolio, fullstack, java, php, segurança da informação">
+    <meta name="author" content="Jonnes Santos">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -15,6 +18,7 @@
             --text-color: #e0e0e0;
             --bg-gradient: linear-gradient(rgba(15, 15, 26, 0.85), rgba(26, 26, 47, 0.85));
             --section-spacing: 3rem;
+            --card-bg: rgba(255, 255, 255, 0.05);
         }
     
         /* Reset e Estilos Base */
@@ -44,7 +48,7 @@
             position: relative;
             min-height: 100vh;
             overflow-y: auto;
-            perspective: 1000px;
+            perspective: 10000px;
         }
     
         /* Seções */
@@ -55,7 +59,7 @@
             justify-content: flex-start;
             align-items: center;
             padding: var(--section-spacing) 20rem;
-            margin: 5rem 0;
+            margin: -3rem 0;
             transform-style: preserve-3d;
             opacity: 0;
             transform: translateY(50px);
@@ -89,6 +93,12 @@
         h2 {
             font-size: 2.8rem;
             margin-bottom: 2rem;
+        }
+    
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
         }
     
         .text-highlight {
@@ -132,10 +142,11 @@
             overflow: hidden;
         }
     
-        .social-link:hover {
+        .social-link:hover, .social-link:focus {
             transform: translateZ(20px);
             background: rgba(0, 255, 157, 0.1);
             box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
+            outline: none;
         }
     
         .social-link::before {
@@ -171,7 +182,8 @@
         /* Grids */
         .tech-grid,
         .certificate-grid,
-        .experience-grid {
+        .experience-grid,
+        .projects-grid {
             display: grid;
             gap: 2rem;
             width: 100%;
@@ -180,20 +192,24 @@
     
         .tech-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
         .certificate-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .projects-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
     
         /* Cards */
         .tech-item,
         .certificate-item,
-        .experience-item {
-            background: rgba(255, 255, 255, 0.05);
+        .experience-item,
+        .project-item {
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 8px;
             border-left: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
     
-        .experience-item:hover {
+        .experience-item:hover,
+        .project-item:hover {
             transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
     
         /* Cybersecurity */
@@ -212,97 +228,242 @@
         }
     
         /* Estilos para a seção sobre aprimorada */
-.bio-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 255, 157, 0.3);
-    padding-bottom: 1rem;
-}
-
-.bio-body {
-    line-height: 1.8;
-}
-
-.intro-text {
-    font-size: 1.1em;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.experience-block, 
-.skills-block, 
-.mission-block {
-    margin: 2.5rem 0;
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-}
-
-.responsibilities-list {
-    list-style: none;
-    margin-top: 1.5rem;
-}
-
-.responsibilities-list li {
-    margin-bottom: 1.2rem;
-    padding-left: 2rem;
-    position: relative;
-}
-
-.responsibilities-list li i {
-    position: absolute;
-    left: 0;
-    top: 0.3rem;
-    color: var(--primary-color);
-}
-.skill-category {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.1);
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.skill-category {
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
-}
-
-.skill-category h4 {
-    color: var(--secondary-color);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.mission-block {
-    border-top: 1px dashed var(--primary-color);
-    padding-top: 2rem;
-    text-align: center;
-    font-style: italic;
-}
-
-@media (max-width: 768px) {
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
+        .bio-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding-bottom: 1rem;
+        }
     
-    .bio-body {
-        padding: 0 1rem;
-    }
-}
-
-        /* Novos estilos para Rodapé */
+        .bio-body {
+            line-height: 1.8;
+        }
+    
+        .intro-text {
+            font-size: 1.1em;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+    
+        .experience-block, 
+        .skills-block, 
+        .mission-block {
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+    
+        .responsibilities-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+    
+        .responsibilities-list li {
+            margin-bottom: 1.2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+    
+        .responsibilities-list li i {
+            position: absolute;
+            left: 0;
+            top: 0.3rem;
+            color: var(--primary-color);
+        }
+        .skill-category {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 157, 0.1);
+        }
+    
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+    
+        .skill-category {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+        }
+    
+        .skill-category h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    
+        .mission-block {
+            border-top: 1px dashed var(--primary-color);
+            padding-top: 2rem;
+            text-align: center;
+            font-style: italic;
+        }
+    
+        /* Seção de Projetos */
+        .project-item {
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            transition: transform 0.5s ease;
+        }
+    
+        .project-item:hover .project-image {
+            transform: scale(1.05);
+        }
+    
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+    
+        .project-link {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 4px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+    
+        .project-link:hover, .project-link:focus {
+            background: rgba(0, 255, 157, 0.2);
+            transform: translateY(-2px);
+            outline: none;
+        }
+    
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+    
+        .tech-tag {
+            background: rgba(0, 184, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+    
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+    
+        .modal-content {
+            background: rgba(15, 15, 26, 0.95);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid var(--primary-color);
+        }
+    
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            background: none;
+            border: none;
+        }
+    
+        /* Navegação */
+        .nav-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+    
+        .nav-toggle {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+    
+        .nav-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+    
+        .nav-menu {
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background: rgba(15, 15, 26, 0.95);
+            border-radius: 8px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 200px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+    
+        .nav-menu.active {
+            display: flex;
+        }
+    
+        .nav-link {
+            padding: 0.8rem 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+    
+        .nav-link:hover, .nav-link:focus {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--primary-color);
+            outline: none;
+        }
+    
+        /* Rodapé */
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -310,66 +471,65 @@
             max-width: 1200px;
             margin: 0 auto 2rem;
         }
-
+    
         .footer-col h4 {
             color: var(--primary-color);
             margin-bottom: 1.5rem;
         }
-
+    
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 2rem;
             margin-top: 2rem;
         }
-
+    
         .legal-links {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
             margin: 1rem 0;
         }
-
+    
         .badges {
             display: flex;
             justify-content: center;
             gap: 1rem;
             margin-top: 1rem;
         }
-
+    
         .security-badge, .a11y-badge {
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.8em;
             background: rgba(255, 255, 255, 0.05);
         }
-
+    
         .security-badge i { color: #00ff9d; }
         .a11y-badge i { color: #00b8ff; }
-
-        /* Rodapé Original Modificado */
+    
         footer {
             padding: 3rem 2rem;
             text-align: center;
             background: rgba(0, 0, 0, 0.6);
             margin-top: 5rem;
             backdrop-filter: blur(8px);
-            border-top: 1px solid rgba(var(--primary-color), 0.2);
+            border-top: 1px solid rgba(0, 255, 157, 0.2);
             position: relative;
         }
-
+    
         footer p {
             margin-bottom: 1.5rem;
             font-size: 0.9em;
             opacity: 0.8;
         }
-
+    
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
         }
-
+    
         .footer-links a {
             text-decoration: none;
             color: var(--text-color);
@@ -378,26 +538,11 @@
             transition: all 0.3s ease;
             position: relative;
         }
-
-        .footer-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
+    
         .footer-links a:hover {
             color: var(--primary-color);
         }
-
-        .footer-links a:hover::before {
-            width: 100%;
-        }
-
+    
         footer::after {
             content: '';
             position: absolute;
@@ -407,174 +552,131 @@
             height: 2px;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(var(--primary-color), 0.4), 
+                rgba(0, 255, 157, 0.4), 
                 transparent);
             animation: footerGlow 3s infinite;
         }
+    
         /* Estilos para a seção de experiência */
-.experience-section {
-    position: relative;
-    padding: 4rem 2rem;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.section-divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    margin: 1rem auto;
-    border-radius: 3px;
-}
-
-.timeline {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50px;
-    height: 100%;
-    width: 2px;
-    background: rgba(0, 255, 157, 0.2);
-}
-
-.timeline-item {
-    display: flex;
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.timeline-badge {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(0, 255, 157, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-    font-size: 1.2rem;
-    border: 2px solid var(--primary-color);
-    margin-right: 2rem;
-    flex-shrink: 0;
-}
-
-.timeline-content {
-    background: rgba(15, 23, 42, 0.7);
-    border-radius: 10px;
-    padding: 1.5rem;
-    flex-grow: 1;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-left: 3px solid var(--primary-color);
-}
-
-.timeline-header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.company-info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-}
-
-.company-name {
-    color: var(--secondary-color);
-    font-weight: 500;
-}
-
-.experience-period {
-    background: rgba(0, 184, 255, 0.1);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8em;
-}
-
-.responsibility {
-    display: flex;
-    margin-bottom: 1.5rem;
-}
-
-.responsibility-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 255, 157, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-    color: var(--primary-color);
-    flex-shrink: 0;
-}
-
-.responsibility-content h4 {
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-    font-size: 1.1em;
-}
-
-.responsibility-content p {
-    font-size: 0.95em;
-    line-height: 1.6;
-    opacity: 0.9;
-}
-
-/* Efeitos e animações */
-.timeline-item:hover .timeline-badge {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
-    transition: all 0.3s ease;
-}
-
-.timeline-content:hover {
-    transform: translateX(10px);
-    transition: all 0.3s ease;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .timeline::before {
-        left: 35px;
-    }
+        .experience-section {
+            position: relative;
+            padding: 4rem 2rem;
+        }
     
-    .timeline-badge {
-        width: 40px;
-        height: 40px;
-        margin-right: 1rem;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
     
-    .company-info {
-        flex-direction: column;
-    }
+        .section-divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            margin: 1rem auto;
+            border-radius: 3px;
+        }
     
-    .experience-period {
-        margin-top: 0.5rem;
-        align-self: flex-start;
-    }
-}
-
-@media (max-width: 480px) {
-    .responsibility {
-        flex-direction: column;
-    }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
     
-    .responsibility-icon {
-        margin-bottom: 0.5rem;
-    }
-}
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50px;
+            height: 100%;
+            width: 2px;
+            background: rgba(0, 255, 157, 0.2);
+        }
     
-        /* Animações */
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+    
+        .timeline-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 255, 157, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            border: 2px solid var(--primary-color);
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+    
+        .timeline-content {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            flex-grow: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 3px solid var(--primary-color);
+        }
+    
+        .timeline-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    
+        .company-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+    
+        .company-name {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+    
+        .experience-period {
+            background: rgba(0, 184, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+    
+        .responsibility {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+    
+        .responsibility-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+    
+        .responsibility-content h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1em;
+        }
+    
+        .responsibility-content p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+    
+        /* Efeitos e animações */
         @keyframes glitch {
             0% { transform: translate(0); }
             20% { transform: translate(-2px, 2px); }
@@ -588,39 +690,6 @@
             0% { opacity: 0; }
             50% { opacity: 1; }
             100% { opacity: 0; }
-        }
-    
-        /* Responsividade */
-        @media (max-width: 992px) {
-            :root { --section-spacing: 2rem; }
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2.2rem; }
-        }
-    
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 1.8rem; }
-            .social-link { padding: 1rem 2rem; }
-            .tech-grid, .certificate-grid { grid-template-columns: 1fr; }
-            section { padding: 2rem 1rem; }
-            footer { padding: 2rem 1rem; }
-            .floating-text { padding: 1rem; }
-        }
-    
-        @media (max-width: 480px) {
-            :root { --section-spacing: 1.5rem; }
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.6rem; }
-            .footer-links { gap: 1rem; }
-            .footer-grid { gap: 1.5rem; }
-        }
-    
-        /* Acessibilidade */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-                animation: none !important;
-            }
         }
     
         /* WebGL Error */
@@ -638,272 +707,440 @@
             text-align: center;
             display: none;
         }
+    
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            section {
+                padding: var(--section-spacing) 10rem;
+            }
+        }
+    
+        @media (max-width: 992px) {
+            :root { --section-spacing: 2rem; }
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.2rem; }
+            section {
+                padding: var(--section-spacing) 5rem;
+            }
+        }
+    
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+            .social-link { padding: 1rem 2rem; }
+            .tech-grid, .certificate-grid, .projects-grid { grid-template-columns: 1fr; }
+            section { padding: 2rem 1.5rem; }
+            footer { padding: 2rem 1rem; }
+            .floating-text { padding: 1rem; }
+            
+            .timeline::before {
+                left: 35px;
+            }
+            
+            .timeline-badge {
+                width: 40px;
+                height: 40px;
+                margin-right: 1rem;
+            }
+            
+            .company-info {
+                flex-direction: column;
+            }
+            
+            .experience-period {
+                margin-top: 0.5rem;
+                align-self: flex-start;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            :root { --section-spacing: 1.5rem; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .footer-links { gap: 1rem; }
+            .footer-grid { gap: 1.5rem; }
+            .nav-container {
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .responsibility {
+                flex-direction: column;
+            }
+            
+            .responsibility-icon {
+                margin-bottom: 0.5rem;
+            }
+        }
+    
+        /* Acessibilidade */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: #000;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+    
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     <canvas id="canvas3d"></canvas>
     <div class="webgl-error"></div>
     
-    <div class="container">
+    <!-- Menu de Navegação -->
+    <div class="nav-container">
+        <button class="nav-toggle" aria-label="Menu de navegação" aria-expanded="false" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-menu" id="navMenu">
+            <a href="#home" class="nav-link" tabindex="0">Início</a>
+            <a href="#about" class="nav-link" tabindex="0">Sobre</a>
+            <a href="#experience" class="nav-link" tabindex="0">Experiência</a>
+            <a href="#projects" class="nav-link" tabindex="0">Projetos</a>
+            <a href="#certificates" class="nav-link" tabindex="0">Certificados</a>
+            <a href="#cybersecurity" class="nav-link" tabindex="0">Cybersecurity</a>
+            <a href="#contact" class="nav-link" tabindex="0">Contato</a>
+        </div>
+    </div>
+    
+    <div class="container" id="main-content">
         <!-- Seção Título -->
-        <section class="title-section" data-speed="0.05">
+        <section class="title-section" id="home" data-speed="0.05">
             <h1>&gt;Jonnes Santos_</h1>
             <div class="social-links">
-                <a href="https://github.com/jonnes-Santos/" class="social-link" data-speed="0.1">
-                    <i class="fab fa-github"></i>
+                <a href="https://github.com/jonnes-Santos/" class="social-link" data-speed="0.1" aria-label="GitHub">
+                    <i class="fab fa-github" aria-hidden="true"></i>
                     GitHub Code
                 </a>
-                <a href="https://www.linkedin.com/in/jonnes-santos/" class="social-link" data-speed="0.15">
-                    <i class="fab fa-linkedin"></i>
+                <a href="https://www.linkedin.com/in/jonnes-santos/" class="social-link" data-speed="0.15" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
                     LinkedIn Pro
                 </a>
-                <a href="#" class="social-link" data-speed="0.2">
-                    <i class="fab fa-codepen"></i>
+                <a href="#" class="social-link" data-speed="0.2" aria-label="CodePen">
+                    <i class="fab fa-codepen" aria-hidden="true"></i>
                     CodePen Labs
                 </a>
             </div>
         </section>
 
-        
+        <!-- Seção Sobre -->
+        <section class="about-section" id="about" data-speed="0.1">
+            <h2 class="text-highlight">SOBRE MIM</h2>
+            <div class="about-content">
+                <div class="bio-card">
+                    <div class="bio-header">
+                        <i class="fas fa-terminal" aria-hidden="true"></i>
+                        <p class="text-highlight">Desenvolvedor Full-Stack & Entusiasta de Segurança Cibernética</p>
+                    </div>
+                    
+                    <div class="bio-body">
+                        <p class="intro-text">
+                            Seja bem-vindo(a) ao meu portfólio profissional! Sou graduando em Ciência da Computação 
+                            com paixão por desenvolvimento de software e segurança da informação.
+                        </p>
+                        
+                        <div class="experience-block">
+                            <h3>Atuação Atual</h3>
+                            <p>
+                                Como <strong>Analista de Redes e Infraestrutura</strong>, minhas responsabilidades incluem:
+                            </p>
+                            <ul class="responsibilities-list">
+                                <li>
+                                    <i class="fas fa-cog" aria-hidden="true"></i>
+                                    <strong>Manutenção remota de sistemas:</strong> Gerenciamento de computadores corporativos, 
+                                    atualização de ferramentas e verificação de integridade de sistemas
+                                </li>
+                                <li>
+                                    <i class="fas fa-network-wired" aria-hidden="true"></i>
+                                    <strong>Otimização de infraestrutura:</strong> Garantia de operacionalidade contínua 
+                                    com identificação proativa de vulnerabilidades
+                                </li>
+                                <li>
+                                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                    <strong>Segurança proativa:</strong> Implementação de políticas de conformidade 
+                                    e proteção de ambientes digitais
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skills-block">
+                            <h3>Competências Técnicas</h3>
+                            <div class="skills-grid">
+                                <div class="skill-category">
+                                    <h4><i class="fas fa-code" aria-hidden="true"></i> Desenvolvimento</h4>
+                                    <p>Java, PHP, SQL, HTML/CSS, JavaScript</p>
+                                </div>
+                                <div class="skill-category">
+                                    <h4><i class="fas fa-brain" aria-hidden="true"></i> Fundamentos</h4>
+                                    <p>Estruturas de dados, algoritmos, design de software</p>
+                                </div>
+                                <div class="skill-category">
+                                    <h4><i class="fas fa-lock" aria-hidden="true"></i> Cybersecurity</h4>
+                                    <p>Ethical Hacking, Pentest Web, Hardening</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mission-block">
+                            <h3>Minha Missão</h3>
+                            <p>
+                                Unir expertise técnica e visão estratégica para proteger infraestruturas digitais, 
+                                promover eficiência operacional e impulsionar a transformação segura das organizações 
+                                através de soluções inovadoras.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Seção Sobre - Versão Aprimorada -->
-<section class="about-section" data-speed="0.1">
-    <h2 class="text-highlight">SOBRE MIM</h2>
-    <div class="about-content">
-        <div class="bio-card">
-            <div class="bio-header">
-                <i class="fas fa-terminal"></i>
-                <p class="text-highlight">Desenvolvedor Full-Stack & Entusiasta de Segurança Cibernética</p>
+        <!-- Seção Experiência -->
+        <section class="experience-section" id="experience" data-speed="0.1">
+            <div class="section-header">
+                <h2 class="text-highlight">EXPERIÊNCIA PROFISSIONAL</h2>
+                <div class="section-divider"></div>
             </div>
             
-            <div class="bio-body">
-                <p class="intro-text">
-                    Seja bem-vindo(a) ao meu portfólio profissional! Sou graduando em Ciência da Computação 
-                    com paixão por desenvolvimento de software e segurança da informação.
-                </p>
-                
-                <div class="experience-block">
-                    <h3>Atuação Atual</h3>
-                    <p>
-                        Como <strong>Analista de Redes e Infraestrutura</strong>, minhas responsabilidades incluem:
-                    </p>
-                    <ul class="responsibilities-list">
-                        <li>
-                            <i class="fas fa-cog"></i>
-                            <strong>Manutenção remota de sistemas:</strong> Gerenciamento de computadores corporativos, 
-                            atualização de ferramentas e verificação de integridade de sistemas
-                        </li>
-                        <li>
-                            <i class="fas fa-network-wired"></i>
-                            <strong>Otimização de infraestrutura:</strong> Garantia de operacionalidade contínua 
-                            com identificação proativa de vulnerabilidades
-                        </li>
-                        <li>
-                            <i class="fas fa-shield-alt"></i>
-                            <strong>Segurança proativa:</strong> Implementação de políticas de conformidade 
-                            e proteção de ambientes digitais
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="skills-block">
-                    <h3>Competências Técnicas</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4><i class="fas fa-code"></i> Desenvolvimento</h4>
-                            <p>Java, PHP, SQL, HTML/CSS, JavaScript</p>
+            <div class="timeline">
+                <!-- Experiência 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge">
+                        <i class="fas fa-network-wired" aria-hidden="true"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Analista de Redes e Infraestrutura</h3>
+                            <div class="company-info">
+                                <span class="company-name">GATEC Soluções Tecnológicas</span>
+                                <span class="experience-period">2025 - Presente</span>
+                            </div>
                         </div>
-                        <div class="skill-category">
-                            <h4><i class="fas fa-brain"></i> Fundamentos</h4>
-                            <p>Estruturas de dados, algoritmos, design de software</p>
-                        </div>
-                        <div class="skill-category">
-                            <h4><i class="fas fa-lock"></i> Cybersecurity</h4>
-                            <p>Ethical Hacking, Pentest Web, Hardening</p>
+                        
+                        <div class="experience-details">
+                            <div class="responsibility">
+                                <div class="responsibility-icon">
+                                    <i class="fas fa-desktop" aria-hidden="true"></i>
+                                </div>
+                                <div class="responsibility-content">
+                                    <h4>Manutenção de Sistemas</h4>
+                                    <p>Gerenciamento remoto de computadores corporativos, atualização de ferramentas e verificação de integridade de sistemas.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="responsibility">
+                                <div class="responsibility-icon">
+                                    <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+                                </div>
+                                <div class="responsibility-content">
+                                    <h4>Otimização de Infraestrutura</h4>
+                                    <p>Garantia de operacionalidade contínua dos recursos tecnológicos, identificação e resolução de vulnerabilidades para minimizar riscos.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="responsibility">
+                                <div class="responsibility-icon">
+                                    <i class="fas fa-shield-virus" aria-hidden="true"></i>
+                                </div>
+                                <div class="responsibility-content">
+                                    <h4>Segurança Proativa</h4>
+                                    <p>Implementação de práticas de conformidade e proteção de ambientes digitais, alinhadas às políticas de segurança corporativa.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="mission-block">
-                    <h3>Minha Missão</h3>
-                    <p>
-                        Unir expertise técnica e visão estratégica para proteger infraestruturas digitais, 
-                        promover eficiência operacional e impulsionar a transformação segura das organizações 
-                        através de soluções inovadoras.
-                    </p>
+                <!-- Experiência 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Full-Stack Developer</h3>
+                            <div class="company-info">
+                                <span class="company-name">Inova Systems</span>
+                                <span class="experience-period">2019 - 2021</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-details">
+                            <div class="responsibility">
+                                <div class="responsibility-icon">
+                                    <i class="fab fa-node-js" aria-hidden="true"></i>
+                                </div>
+                                <div class="responsibility-content">
+                                    <h4>Desenvolvimento de Aplicações</h4>
+                                    <p>Construção de soluções financeiras utilizando Node.js no backend e React no frontend, com integração a APIs de pagamento.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="responsibility">
+                                <div class="responsibility-icon">
+                                    <i class="fas fa-database" aria-hidden="true"></i>
+                                </div>
+                                <div class="responsibility-content">
+                                    <h4>Gestão de Dados</h4>
+                                    <p>Modelagem e otimização de bancos de dados relacionais para aplicações financeiras de alta performance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-        <!-- Seção Experiência - Versão Aprimorada -->
-<section class="experience-section" data-speed="0.1">
-    <div class="section-header">
-        <h2 class="text-highlight">EXPERIÊNCIA PROFISSIONAL</h2>
-        <div class="section-divider"></div>
-    </div>
-    
-    <div class="timeline">
-        <!-- Experiência 1 -->
-        <div class="timeline-item">
-            <div class="timeline-badge">
-                <i class="fas fa-network-wired"></i>
-            </div>
-            <div class="timeline-content">
-                <div class="timeline-header">
-                    <h3>Analista de Redes e Infraestrutura</h3>
-                    <div class="company-info">
-                        <span class="company-name">GATEC Soluções Tecnológicas</span>
-                        <span class="experience-period">2025 - Presente</span>
+        <!-- Seção Projetos -->
+        <section class="projects-section" id="projects" data-speed="0.1">
+            <h2 class="text-highlight">PROJETOS DESTACADOS</h2>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Sistema de Monitoramento de Rede" class="project-image" loading="lazy">
+                    <h3>Sistema de Monitoramento de Rede</h3>
+                    <p>Ferramenta para monitoramento em tempo real de tráfego de rede e detecção de anomalias.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" aria-label="Ver demonstração do Sistema de Monitoramento de Rede">
+                            <i class="fas fa-eye" aria-hidden="true"></i> Demo
+                        </a>
+                        <a href="#" class="project-link" aria-label="Ver código do Sistema de Monitoramento de Rede no GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i> Código
+                        </a>
                     </div>
                 </div>
                 
-                <div class="experience-details">
-                    <div class="responsibility">
-                        <div class="responsibility-icon">
-                            <i class="fas fa-desktop"></i>
-                        </div>
-                        <div class="responsibility-content">
-                            <h4>Manutenção de Sistemas</h4>
-                            <p>Gerenciamento remoto de computadores corporativos, atualização de ferramentas e verificação de integridade de sistemas.</p>
-                        </div>
+                <div class="project-item">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3" alt="Aplicativo de Gerenciamento Financeiro" class="project-image" loading="lazy">
+                    <h3>Aplicativo de Gerenciamento Financeiro</h3>
+                    <p>Solução completa para controle de finanças pessoais com relatórios e planejamento orçamentário.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">React</span>
                     </div>
-                    
-                    <div class="responsibility">
-                        <div class="responsibility-icon">
-                            <i class="fas fa-tachometer-alt"></i>
-                        </div>
-                        <div class="responsibility-content">
-                            <h4>Otimização de Infraestrutura</h4>
-                            <p>Garantia de operacionalidade contínua dos recursos tecnológicos, identificação e resolução de vulnerabilidades para minimizar riscos.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="responsibility">
-                        <div class="responsibility-icon">
-                            <i class="fas fa-shield-virus"></i>
-                        </div>
-                        <div class="responsibility-content">
-                            <h4>Segurança Proativa</h4>
-                            <p>Implementação de práticas de conformidade e proteção de ambientes digitais, alinhadas às políticas de segurança corporativa.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Experiência 2 -->
-        <div class="timeline-item">
-            <div class="timeline-badge">
-                <i class="fas fa-code"></i>
-            </div>
-            <div class="timeline-content">
-                <div class="timeline-header">
-                    <h3>Full-Stack Developer</h3>
-                    <div class="company-info">
-                        <span class="company-name">Inova Systems</span>
-                        <span class="experience-period">2019 - 2021</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link" aria-label="Ver demonstração do Aplicativo de Gerenciamento Financeiro">
+                            <i class="fas fa-eye" aria-hidden="true"></i> Demo
+                        </a>
+                        <a href="#" class="project-link" aria-label="Ver código do Aplicativo de Gerenciamento Financeiro no GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i> Código
+                        </a>
                     </div>
                 </div>
                 
-                <div class="experience-details">
-                    <div class="responsibility">
-                        <div class="responsibility-icon">
-                            <i class="fab fa-node-js"></i>
-                        </div>
-                        <div class="responsibility-content">
-                            <h4>Desenvolvimento de Aplicações</h4>
-                            <p>Construção de soluções financeiras utilizando Node.js no backend e React no frontend, com integração a APIs de pagamento.</p>
-                        </div>
+                <div class="project-item">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d" alt="Ferramenta de Pentest Automatizado" class="project-image" loading="lazy">
+                    <h3>Ferramenta de Pentest Automatizado</h3>
+                    <p>Scanner de vulnerabilidades para aplicações web com relatórios detalhados de segurança.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">OWASP</span>
+                        <span class="tech-tag">Docker</span>
                     </div>
-                    
-                    <div class="responsibility">
-                        <div class="responsibility-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <div class="responsibility-content">
-                            <h4>Gestão de Dados</h4>
-                            <p>Modelagem e otimização de bancos de dados relacionais para aplicações financeiras de alta performance.</p>
-                        </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" aria-label="Ver demonstração da Ferramenta de Pentest Automatizado">
+                            <i class="fas fa-eye" aria-hidden="true"></i> Demo
+                        </a>
+                        <a href="#" class="project-link" aria-label="Ver código da Ferramenta de Pentest Automatizado no GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i> Código
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Seção Certificados -->
-        <section class="certificate-section" data-speed="0.1">
+        <section class="certificate-section" id="certificates" data-speed="0.1">
             <h2 class="text-highlight">CERTIFICADOS</h2>
             <div class="certificate-grid">
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Git e GitHub</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>JAVA: Fundamento básico</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>JAVA: Orientação a objetos</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Lógica de Programação</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>PHP: Criando sua Aplicação</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>PHP: Conceitos, dados e loops</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>MySQL: Conhecendo a ferramenta</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Linux: Diretórios, permissões e processos</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Segurança da Informação</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Pentest: Explorando vulnerabilidades</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Pentest: Investigando vulnerabilidades</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Segurança WEB em JAVA</h3>
                     <p>Alura Cursos</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Introduction to CyberSecurity</h3>
                     <p>CISCO Academy</p>
                 </div>
                 <div class="certificate-item">
-                    <i class="fas fa-certificate text-highlight"></i>
+                    <i class="fas fa-certificate text-highlight" aria-hidden="true"></i>
                     <h3>Ethical Hacker</h3>
                     <p>CISCO Academy</p>
                 </div>
@@ -911,23 +1148,23 @@
         </section>
 
         <!-- Seção CyberSecurity -->
-        <section class="cyber-section" data-speed="0.1">
+        <section class="cyber-section" id="cybersecurity" data-speed="0.1">
             <h2 class="text-highlight" style="color: #ff4b4b;">SEGURANÇA CIBERNÉTICA</h2>
             <div class="cyber-skills">
                 <div class="cyber-skill-item">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
                     <h3>Pentest Básico</h3>
                     <p>Testes de invasão em ambientes controlados</p>
                     <p class="text-highlight">OWASP Top 10 | Metasploit | Nmap</p>
                 </div>
                 <div class="cyber-skill-item">
-                    <i class="fas fa-user-secret"></i>
+                    <i class="fas fa-user-secret" aria-hidden="true"></i>
                     <h3>Hacker Ético</h3>
                     <p>Análise de vulnerabilidades</p>
                     <p class="text-highlight">Burp Suite | Wireshark | Kali Linux</p>
                 </div>
                 <div class="cyber-skill-item">
-                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-lock" aria-hidden="true"></i>
                     <h3>Hardening</h3>
                     <p>Hardening de sistemas</p>
                     <p class="text-highlight">Configurações seguras | Auditorias</p>
@@ -935,7 +1172,27 @@
             </div>
         </section>
 
-        <!-- Rodapé Modificado -->
+        <!-- Seção de Contato -->
+        <section class="contact-section" id="contact" data-speed="0.1">
+            <h2 class="text-highlight">ENTRE EM CONTATO</h2>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Mensagem</button>
+            </form>
+        </section>
+
+        <!-- Rodapé -->
         <footer data-speed="0.1">
             <div class="footer-grid">
                 <div class="footer-col">
@@ -947,18 +1204,19 @@
                 <div class="footer-col">
                     <h4>Navegação</h4>
                     <div class="footer-links">
-                        <a href="#"><i class="fas fa-arrow-up"></i> Topo</a>
-                        <a href="#"><i class="fas fa-briefcase"></i> Experiência</a>
-                        <a href="#"><i class="fas fa-shield"></i> Cybersecurity</a>
+                        <a href="#home"><i class="fas fa-arrow-up" aria-hidden="true"></i> Topo</a>
+                        <a href="#experience"><i class="fas fa-briefcase" aria-hidden="true"></i> Experiência</a>
+                        <a href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projetos</a>
+                        <a href="#cybersecurity"><i class="fas fa-shield-alt" aria-hidden="true"></i> Cybersecurity</a>
                     </div>
                 </div>
 
                 <div class="footer-col">
                     <h4>Conecte-se</h4>
                     <div class="footer-links">
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                        <a href="#"><i class="fab fa-dev"></i> Dev.to</a>
-                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/jonnes-Santos/"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                        <a href="#"><i class="fab fa-dev" aria-hidden="true"></i> Dev.to</a>
+                        <a href="https://www.linkedin.com/in/jonnes-santos/"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
@@ -971,11 +1229,21 @@
                     <a href="#">Política de Cookies</a>
                 </div>
                 <div class="badges">
-                    <span class="security-badge"><i class="fas fa-lock"></i> Site Seguro</span>
-                    <span class="a11y-badge"><i class="fas fa-universal-access"></i> WCAG 2.1 AA</span>
+                    <span class="security-badge"><i class="fas fa-lock" aria-hidden="true"></i> Site Seguro</span>
+                    <span class="a11y-badge"><i class="fas fa-universal-access" aria-hidden="true"></i> WCAG 2.1 AA</span>
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Modal para projetos -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal" aria-label="Fechar modal">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <img id="modalImage" src="" alt="" class="modal-image">
+            <div id="modalContent"></div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -1111,6 +1379,133 @@
             });
         };
     
+        // Funções para o menu de navegação
+        const setupNavigation = () => {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            navToggle.addEventListener('click', () => {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isExpanded);
+                navMenu.classList.toggle('active');
+            });
+            
+            // Fechar menu ao clicar em um link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Fechar menu ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navMenu.classList.remove('active');
+                }
+            });
+        };
+        
+        // Funções para o modal de projetos
+        const setupProjectModals = () => {
+            const modal = document.getElementById('projectModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            const modalContent = document.getElementById('modalContent');
+            
+            document.querySelectorAll('.project-item').forEach(project => {
+                project.addEventListener('click', () => {
+                    const title = project.querySelector('h3').textContent;
+                    const imageSrc = project.querySelector('img').src;
+                    const description = project.querySelector('p').textContent;
+                    
+                    modalTitle.textContent = title;
+                    modalImage.src = imageSrc;
+                    modalImage.alt = title;
+                    modalContent.innerHTML = `
+                        <p>${description}</p>
+                        <div class="modal-tech">
+                            ${project.querySelector('.project-tech').innerHTML}
+                        </div>
+                        <div class="modal-links">
+                            ${project.querySelector('.project-links').innerHTML}
+                        </div>
+                    `;
+                    
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        };
+        
+        // Formulário de contato
+        const setupContactForm = () => {
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    // Simulação de envio
+                    const submitBtn = contactForm.querySelector('.submit-btn');
+                    submitBtn.textContent = 'Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = 'Mensagem Enviada!';
+                        contactForm.reset();
+                        
+                        setTimeout(() => {
+                            submitBtn.textContent = 'Enviar Mensagem';
+                            submitBtn.disabled = false;
+                        }, 2000);
+                    }, 1500);
+                });
+            }
+        };
+        
+        // Efeito de digitação no título
+        const setupTypeEffect = () => {
+            const title = document.querySelector('h1');
+            const originalText = title.textContent;
+            let isDeleting = false;
+            let charIndex = 0;
+            let typingSpeed = 150;
+            
+            const typeEffect = () => {
+                const currentText = originalText.substring(0, charIndex);
+                title.textContent = currentText + (isDeleting ? '' : '|');
+                
+                if (!isDeleting && charIndex === originalText.length) {
+                    isDeleting = true;
+                    typingSpeed = 300;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    typingSpeed = 300;
+                }
+                
+                charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+                setTimeout(typeEffect, typingSpeed);
+            };
+            
+            // Inicia após 1s
+            setTimeout(typeEffect, 1000);
+        };
+
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -1123,31 +1518,29 @@
                 document.addEventListener('mousemove', handleMouseMove);
                 configureScrollAnimations();
             }
-            // Efeito de digitação dinâmica no título
-const title = document.querySelector('h1');
-const originalText = title.textContent;
-let isDeleting = false;
-let charIndex = 0;
-let typingSpeed = 150;
-
-const typeEffect = () => {
-    const currentText = originalText.substring(0, charIndex);
-    title.textContent = currentText + (isDeleting ? '' : '|');
-    
-    if (!isDeleting && charIndex === originalText.length) {
-        isDeleting = true;
-        typingSpeed = 300;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        typingSpeed = 300;
-    }
-    
-    charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
-    setTimeout(typeEffect, typingSpeed);
-};
-
-// Inicia após 2s (opcional)
-setTimeout(typeEffect, 2000);
+            
+            // Configurações adicionais
+            setupNavigation();
+            setupProjectModals();
+            setupContactForm();
+            setupTypeEffect();
+            
+            // Suavizar rolagem para links âncora
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
