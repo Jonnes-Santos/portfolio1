@@ -1051,6 +1051,45 @@ body {
         padding: 1rem;
     }
 }
+/* Certificates Section - Correções para mobile */
+.certificate-section {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  display: block;
+  padding: var(--section-spacing) 1.5rem; /* Ajuste o padding para mobile */
+}
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Sempre 1 coluna em mobile */
+  gap: 1rem;
+  width: 100%;
+}
+
+.certificate-item {
+  padding: 1.5rem;
+  margin: 0; /* Remove margens que podem causar problemas */
+  background: var(--card-bg);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 8px;
+}
+
+/* Garantir que a seção não está sendo cortada */
+.container {
+  overflow: visible !important;
+}
+
+/* Ajustes específicos para telas muito pequenas */
+@media (max-width: 480px) {
+  .certificate-section {
+    padding: var(--section-spacing) 1rem;
+  }
+  
+  .certificate-item {
+    padding: 1.2rem;
+  }
+}
 .certificate-section {
   display: block !important;
   width: 100%;
