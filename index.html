@@ -797,318 +797,238 @@
         .skip-link:focus {
             top: 0;
         }
+
+        /* Seção Certificados - Correções para mobile */
+        .certificate-section {
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            display: block;
+            padding: var(--section-spacing) 1.5rem;
+        }
+
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .certificate-item {
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* Ajustes específicos para telas pequenas */
         @media (max-width: 768px) {
-  .certificate-grid {
-    grid-template-columns: 1fr; /* Força 1 coluna em mobile */
-    gap: 1rem; /* Espaçamento menor entre itens */
-  }
-  
-  .certificate-item {
-    padding: 1.5rem; /* Padding menor para mobile */
-    margin: 0 10px; /* Margem lateral para não colar nas bordas */
-  }
-}
-.certificate-section {
-  display: block !important;
-  width: 100%;
-}
-.certificate-section {
-  position: relative;
-  z-index: 10;
-}
-/* Adicione ao seu CSS existente */
-.github-section {
-    padding: var(--section-spacing) 10rem;
-}
+            .certificate-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .certificate-item {
+                padding: 1.2rem;
+                margin: 0;
+            }
+        }
 
-.github-repos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
+        /* GitHub Section */
+        .github-section {
+            padding: var(--section-spacing) 10rem;
+        }
 
-.repo-card {
-    background: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
+        .github-repos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
 
-.repo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 255, 157, 0.1);
-}
+        .repo-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
 
-.repo-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+        .repo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 157, 0.1);
+        }
 
-.repo-name {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--primary-color);
-    font-family: 'Ubuntu Mono', monospace;
-}
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
-.repo-stats {
-    display: flex;
-    gap: 1rem;
-}
+        .repo-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-family: 'Ubuntu Mono', monospace;
+        }
 
-.repo-stat {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.9rem;
-}
+        .repo-stats {
+            display: flex;
+            gap: 1rem;
+        }
 
-.repo-description {
-    margin-bottom: 1rem;
-    flex-grow: 1;
-}
+        .repo-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
 
-.repo-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-}
+        .repo-description {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
 
-.repo-language {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-}
+        .repo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
 
-.language-color {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
+        .repo-language {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
 
-.repo-link {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
+        .language-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
 
-.repo-link:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
-}
+        .repo-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
 
-/* Skeleton loading */
-.skeleton-repo {
-    background: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: 8px;
-}
+        .repo-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
 
-.skeleton-line {
-    height: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    margin-bottom: 0.8rem;
-    border-radius: 4px;
-    animation: pulse 1.5s infinite ease-in-out;
-}
+        /* Skeleton loading */
+        .skeleton-repo {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
 
-.skeleton-line.short {
-    width: 60%;
-}
-/* Adicione ao seu CSS existente */
-.cursor {
-    animation: blink 1s infinite;
-    color: var(--primary-color);
-}
+        .skeleton-line {
+            height: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 0.8rem;
+            border-radius: 4px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
+        .skeleton-line.short {
+            width: 60%;
+        }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.3; }
-}
+        /* Typing Effect */
+        .cursor {
+            animation: blink 1s infinite;
+            color: var(--primary-color);
+        }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .github-section {
-        padding: var(--section-spacing) 2rem;
-    }
-    
-    .github-repos {
-        grid-template-columns: 1fr;
-    }
-}
-/* Adicione ao seu CSS existente */
-.professional-title {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.3;
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
-.title-line {
-    display: block;
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.3; }
+        }
 
-.subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    color: var(--secondary-color);
-    margin-left: 1.5rem;
-}
+        /* Professional Title */
+        .professional-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-.comment {
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
-    color: #777;
-    font-style: italic;
-    margin-left: 3rem;
-}
+        .title-line {
+            display: block;
+        }
 
-/* Melhorias na fonte geral */
-body {
-    font-family: 'Fira Code', 'Courier New', Courier, monospace;
-    /* Mantenha suas outras propriedades */
-}
-/* Atualize suas media queries existentes */
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: var(--secondary-color);
+            margin-left: 1.5rem;
+        }
 
-@media (max-width: 1200px) {
-    section {
-        padding: var(--section-spacing) 5rem;
-    }
-    
-    .professional-title {
-        font-size: 2.8rem;
-    }
-}
+        .comment {
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            color: #777;
+            font-style: italic;
+            margin-left: 3rem;
+        }
 
-@media (max-width: 992px) {
-    section {
-        padding: var(--section-spacing) 3rem;
-    }
-    
-    .professional-title {
-        font-size: 2.2rem;
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-    }
-}
+        /* Responsividade adicional */
+        @media (max-width: 768px) {
+            .github-section {
+                padding: var(--section-spacing) 2rem;
+            }
+            
+            .github-repos {
+                grid-template-columns: 1fr;
+            }
+            
+            .professional-title {
+                text-align: center;
+            }
+            
+            .subtitle, .comment {
+                margin-left: 0;
+                text-align: center;
+            }
+            
+            .social-links {
+                width: 100%;
+            }
+        }
 
-@media (max-width: 768px) {
-    section {
-        padding: var(--section-spacing) 2rem;
-    }
-    
-    .professional-title {
-        font-size: 1.8rem;
-        text-align: center;
-    }
-    
-    .subtitle, .comment {
-        margin-left: 0;
-        text-align: center;
-    }
-    
-    .social-links {
-        width: 100%;
-    }
-    
-    .social-link {
-        padding: 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .professional-title {
-        font-size: 1.5rem;
-    }
-    
-    .subtitle {
-        font-size: 1rem;
-    }
-    
-    .comment {
-        font-size: 0.8rem;
-    }
-    
-    .repo-card {
-        padding: 1rem;
-    }
-}
-/* Certificates Section - Correções para mobile */
-.certificate-section {
-  width: 100%;
-  position: relative;
-  z-index: 10;
-  display: block;
-  padding: var(--section-spacing) 1.5rem; /* Ajuste o padding para mobile */
-}
-
-.certificate-grid {
-  display: grid;
-  grid-template-columns: 1fr; /* Sempre 1 coluna em mobile */
-  gap: 1rem;
-  width: 100%;
-}
-
-.certificate-item {
-  padding: 1.5rem;
-  margin: 0; /* Remove margens que podem causar problemas */
-  background: var(--card-bg);
-  border-left: 4px solid var(--primary-color);
-  border-radius: 8px;
-}
-
-/* Garantir que a seção não está sendo cortada */
-.container {
-  overflow: visible !important;
-}
-
-/* Ajustes específicos para telas muito pequenas */
-@media (max-width: 480px) {
-  .certificate-section {
-    padding: var(--section-spacing) 1rem;
-  }
-  
-  .certificate-item {
-    padding: 1.2rem;
-  }
-}
-.certificate-section {
-  display: block !important;
-  width: 100%;
-}
-.certificate-section {
-  position: relative;
-  z-index: 10;
-}
-@media (max-width: 768px) {
-  .certificate-grid {
-    grid-template-columns: 1fr; /* Força 1 coluna em mobile */
-    gap: 1rem; /* Espaçamento menor entre itens */
-  }
-  
-  .certificate-item {
-    padding: 1.5rem; /* Padding menor para mobile */
-    margin: 0 10px; /* Margem lateral para não colar nas bordas */
-  }
-}
+        @media (max-width: 480px) {
+            .professional-title {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .comment {
+                font-size: 0.8rem;
+            }
+            
+            .repo-card {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1135,7 +1055,6 @@ body {
     <div class="container" id="main-content">
         <!-- Seção Título -->
         <section class="title-section" id="home" data-speed="0.05">
-            <!-- Atualize seu título para algo mais profissional -->
             <h1 class="professional-title" id="dynamic-title">
                 <span class="title-line">&gt; <span id="typing-text">Jonnes Santos</span><span class="cursor">|</span></span>
                 <span class="title-line subtitle" id="subtitle-line"></span>
